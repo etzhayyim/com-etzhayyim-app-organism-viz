@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "scripts": {
+    "test": "nbb --classpath src:test -e \"(require '[clojure.test :as t] 'etzhayyim-organism-viz.pruning-test 'etzhayyim-organism-viz.aliveness-test 'etzhayyim-organism-viz.ideal-state-test) (let [r (t/run-tests 'etzhayyim-organism-viz.pruning-test 'etzhayyim-organism-viz.aliveness-test 'etzhayyim-organism-viz.ideal-state-test)] (.exit js/process (if (pos? (+ (:fail r) (:error r))) 1 0)))\""
+  }
+}
