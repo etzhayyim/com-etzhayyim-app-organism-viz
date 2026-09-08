@@ -3,7 +3,7 @@
   (candidate / round1 / to-markdown) + a tmp-dir fixture for the #?(:clj) FS
   scanners. The daemon NEVER prunes — these assert it SURFACES honestly."
   (:require [clojure.test :refer [deftest is testing]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [etzhayyim-organism-viz.pruning :as p]))
 
 (deftest candidate-shape
