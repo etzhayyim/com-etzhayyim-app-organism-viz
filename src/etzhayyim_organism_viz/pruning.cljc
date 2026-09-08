@@ -29,7 +29,7 @@
   House style: keep candidate maps string-keyed, byte-for-byte the same shape
   the Python @dataclass(asdict) produced; pure fns; host/file I/O at the #?(:clj) edge.
   (The Python __main__ demo is omitted — not ported.)"
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 ;; The Python @dataclass Candidate field order (kept for parity / documentation).
 (def candidate-fields ["id" "kind" "path" "idle_days" "severity" "reasons"])
