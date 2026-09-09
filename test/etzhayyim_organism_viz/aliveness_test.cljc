@@ -3,7 +3,7 @@
   tmp-repo fixtures (the same Shannon-entropy / Pearson / axis-Δ / tended-cell
   fixtures as the Python pytest suite). Pure fns + the #?(:clj) FS scanners."
   (:require [clojure.test :refer [deftest is testing]]
-            [kotoba.lang.text :as str]
+            [clojure.string :as str]
             [etzhayyim-organism-viz.aliveness :as av]))
 
 (defn- approx
