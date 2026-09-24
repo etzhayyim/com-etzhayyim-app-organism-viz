@@ -1,7 +1,7 @@
 (ns etzhayyim-organism-viz.ideal-state-test
   "Coverage for the homeostatic-range model (§1.15 non-eschatology: bands, not
   targets). Pure — no host I/O."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [etzhayyim-organism-viz.ideal-state :as ideal]))
 
 (deftest ranges-shape
