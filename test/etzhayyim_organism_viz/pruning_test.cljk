@@ -2,7 +2,7 @@
   "Coverage for the pruning-candidate detector (盆栽 剪定 surface). Pure fns
   (candidate / round1 / to-markdown) + a tmp-dir fixture for the #?(:clj) FS
   scanners. The daemon NEVER prunes — these assert it SURFACES honestly."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [clojure.string :as str]
             [etzhayyim-organism-viz.pruning :as p]))
 

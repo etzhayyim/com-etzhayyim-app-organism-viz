@@ -1,7 +1,7 @@
 #!/usr/bin/env kbb
 ;; run_tests.cljk — repo rule: ship a .clj runner, not a .sh. Equivalent to `kbb -M:test`.
 ;; Loads every organism-viz cljc twin + its tests and exits non-zero on any failure.
-(require '[clojure.test :as t]
+(require '[kotoba.test :as t]
          '[etzhayyim-organism-viz.pruning-test]
          '[etzhayyim-organism-viz.aliveness-test]
          '[etzhayyim-organism-viz.ideal-state-test])
