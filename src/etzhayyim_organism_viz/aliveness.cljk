@@ -18,7 +18,7 @@
   trade-offs between dimensions. The dashboard renders 5 dials; the operator reads
   all five. House style: pure fns in cljc, host I/O at the #?(:clj) edge, ex-info
   for errors. (The Python module-level helpers map 1:1 to fns below.)"
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 ;; ── pure: rounding (Python round(x, n), round-half-to-even) ──────────────────
 (defn round-n
@@ -78,7 +78,7 @@
   Mirrors the Python `for name, score in _AXIS_ROW.findall(body)` loop."
   [body]
   #?(:clj  (reduce (fn [m [_ name score]]
-                     (assoc m (str/lower-case (str/trim name)) (Integer/parseInt score)))
+                     (assoc m (str/lower (str/trim name)) (Integer/parseInt score)))
                    {}
                    (re-seq axis-row-re body))
      :cljs (loop [m {}]
@@ -86,7 +86,7 @@
              (let [acc (atom {})]
                (.replace body axis-row-re
                          (fn [_ name score]
-                           (swap! acc assoc (str/lower-case (str/trim name)) (js/parseInt score 10))
+                           (swap! acc assoc (str/lower (str/trim name)) (js/parseInt score 10))
                            ""))
                (merge m @acc)))))
 
