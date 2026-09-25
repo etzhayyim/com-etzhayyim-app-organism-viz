@@ -2,7 +2,7 @@
   "Coverage for the pruning-candidate detector (盆栽 剪定 surface). Pure fns
   (candidate / round1 / to-markdown) + a tmp-dir fixture for the #?(:clj) FS
   scanners. The daemon NEVER prunes — these assert it SURFACES honestly."
-  (:require [kotoba.test :refer [deftest is testing]]
+  (:require [kotoba.io :as kio] [kotoba.test :refer [deftest is testing]]
             [kotoba.lang.text :as str]
             [etzhayyim-organism-viz.pruning :as p]))
 
@@ -41,14 +41,14 @@
 #?(:clj
    (deftest scan-apps-surfaces-stale-app
      (testing "scan-apps flags a stale, README-less 60-apps dir (severity ≥ 1)"
-       (let [tmp (str (java.nio.file.Files/createTempDirectory
-                       "prune" (make-array java.nio.file.attribute.FileAttribute 0)))
-             stale (java.io.File. ^String tmp "60-apps/etzhayyim-project-ghost")
-             _ (.mkdirs stale)
-             marker (java.io.File. stale "old.txt")
+       (let [tmp (str (kio/temp-dir
+                       "prune"))
+             stale (kio/file ^String tmp "60-apps/etzhayyim-project-ghost")
+             _ (kio/mkdirs stale)
+             marker (kio/file stale "old.txt")
              _ (spit marker "x")
              ;; backdate the dir's newest file to ~200 days ago → idle > 180
-             _ (.setLastModified marker (- (System/currentTimeMillis)
+             _ (kio/set-last-modified marker (- (System/currentTimeMillis)
                                            (long (* 200 86400 1000))))
              cands (p/scan-apps tmp)
              ghost (first (filter #(= "app/etzhayyim-project-ghost" (get % "id")) cands))]
@@ -59,4 +59,4 @@
            (is (some #(str/includes? % "README") (get ghost "reasons"))
                "README-less + stale is noted")
            (finally
-             (doseq [f (reverse (file-seq (java.io.File. ^String tmp)))] (.delete f))))))))
+             (doseq [f (reverse (kio/file-seq (kio/file ^String tmp)))] (kio/delete f))))))))
